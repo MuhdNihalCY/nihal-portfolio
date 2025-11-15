@@ -42,12 +42,12 @@ const Experience = () => {
         <div className="space-y-12 lg:space-y-16">
           {experiences.map((exp, index) => (
             <Parallax key={index} speed={0.1 + index * 0.05} direction={index % 2 === 0 ? 'up' : 'down'}>
-              <motion.div
-                initial={{ opacity: 0, x: -30 }}
-                animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
-                transition={{ duration: 0.6, delay: 0.4 + index * 0.2 }}
-                className="relative lg:pl-24"
-              >
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
+              transition={{ duration: 0.6, delay: 0.4 + index * 0.2 }}
+              className="relative lg:pl-24"
+            >
               {/* Timeline dot with pulse */}
               <div className="absolute left-0 top-8 hidden lg:block">
                 <div className="relative">
@@ -97,7 +97,7 @@ const Experience = () => {
                   </ul>
                 </div>
               </motion.div>
-              </motion.div>
+            </motion.div>
             </Parallax>
           ))}
         </div>

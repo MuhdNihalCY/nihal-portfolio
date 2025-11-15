@@ -63,12 +63,12 @@ const About = () => {
       {/* Content */}
       <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
         <Parallax speed={0.1} direction="up">
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="space-y-6"
-          >
+        <motion.div
+          initial={{ opacity: 0, x: -50 }}
+          animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+          className="space-y-6"
+        >
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
@@ -93,17 +93,17 @@ const About = () => {
           >
             My approach combines technical excellence with user-centric design, ensuring that every project I work on is not only functional but also performant, accessible, and SEO-optimized.
           </motion.p>
-          </motion.div>
+        </motion.div>
         </Parallax>
 
         {/* Highlights Grid */}
         <Parallax speed={0.15} direction="down">
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-            className="grid grid-cols-2 gap-4"
-          >
+        <motion.div
+          initial={{ opacity: 0, x: 50 }}
+          animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
+          transition={{ duration: 0.8, delay: 0.6 }}
+          className="grid grid-cols-2 gap-4"
+        >
           {highlights.map((highlight, index) => {
             const Icon = highlight.icon
             return (
@@ -120,7 +120,7 @@ const About = () => {
               </motion.div>
             )
           })}
-          </motion.div>
+        </motion.div>
         </Parallax>
       </div>
     </motion.div>

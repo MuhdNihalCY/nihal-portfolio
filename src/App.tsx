@@ -13,7 +13,8 @@ import Footer from './components/Footer'
 import ErrorBoundary from './components/ErrorBoundary'
 import SEO from './components/SEO'
 import TextureOverlay from './components/TextureOverlay'
-import MouseTracker from './components/MouseTracker'
+import CursorParticles from './components/CursorParticles'
+import EasterEggs from './components/EasterEggs'
 import { smoothScrollTo } from './utils/smoothScroll'
 import { Parallax } from './components/Parallax'
 import './styles/globals.css'
@@ -60,8 +61,11 @@ const App = () => {
         {/* Minimal Texture Overlay */}
         <TextureOverlay />
         
-        {/* Mouse Tracking Background Effect */}
-        <MouseTracker />
+        {/* Cursor Particles - Playable with cursor */}
+        <CursorParticles />
+        
+        {/* Easter Eggs - Fun Interactions */}
+        <EasterEggs />
         
         <Header />
         

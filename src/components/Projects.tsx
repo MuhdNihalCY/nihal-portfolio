@@ -38,13 +38,13 @@ const Projects = () => {
       <div className="space-y-6 lg:space-y-8">
         {projects.map((project, index) => (
           <Parallax key={index} speed={0.1 + index * 0.05} direction={index % 2 === 0 ? 'up' : 'down'}>
-            <motion.div
-              initial={{ opacity: 0, y: 50, scale: 0.95 }}
-              animate={isInView ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 50, scale: 0.95 }}
-              transition={{ duration: 0.6, delay: 0.4 + index * 0.15 }}
-              whileHover={{ y: -5, scale: 1.01 }}
-              className="w-full"
-            >
+          <motion.div
+            initial={{ opacity: 0, y: 50, scale: 0.95 }}
+            animate={isInView ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 50, scale: 0.95 }}
+            transition={{ duration: 0.6, delay: 0.4 + index * 0.15 }}
+            whileHover={{ y: -5, scale: 1.01 }}
+            className="w-full"
+          >
             <div className="bg-dark-elevated border-2 border-accent-primary/20 rounded-2xl p-6 sm:p-8 lg:p-10 group hover:border-accent-primary/50 transition-all relative overflow-hidden hover-lift smooth-transition">
               {/* Hover overlay */}
               <div className="absolute top-0 right-0 w-40 h-40 bg-accent-primary/5 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -116,7 +116,7 @@ const Projects = () => {
                 </div>
               </div>
             </div>
-            </motion.div>
+          </motion.div>
           </Parallax>
         ))}
       </div>
