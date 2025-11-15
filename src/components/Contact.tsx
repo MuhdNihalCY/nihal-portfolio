@@ -90,15 +90,19 @@ const Contact = () => {
               animate={isInView ? { opacity: 1, y: 0, rotateY: 0 } : { opacity: 0, y: 30, rotateY: -15 }}
               transition={{ duration: 0.6, delay: 0.4 + index * 0.1 }}
               whileHover={{ y: -10, scale: 1.03, rotateZ: 2 }}
-              className="bg-dark-elevated border-2 border-accent-primary/20 rounded-2xl p-6 sm:p-8 flex flex-col items-center text-center group hover:border-accent-primary/50 transition-all relative overflow-hidden"
+              className="bg-dark-elevated border-2 border-accent-primary/20 rounded-2xl p-6 sm:p-8 flex flex-col items-center text-center group hover:border-accent-primary/50 transition-all relative overflow-hidden hover-lift smooth-transition"
             >
               {/* Hover overlay */}
               <div className="absolute top-0 right-0 w-32 h-32 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity bg-accent-primary/10" />
 
               {/* Icon */}
-              <div className="w-16 h-16 rounded-xl flex items-center justify-center mb-6 transition-colors relative z-10 bg-accent-primary/10 group-hover:bg-accent-primary/20 border-2 border-accent-primary/30">
-                <Icon className="text-2xl text-accent-primary" />
-              </div>
+              <motion.div 
+                whileHover={{ rotate: 360 }}
+                transition={{ duration: 0.6, ease: "easeInOut" }}
+                className="w-16 h-16 rounded-xl flex items-center justify-center mb-6 transition-colors relative z-10 bg-accent-primary/10 group-hover:bg-accent-primary/20 border-2 border-accent-primary/30 smooth-transition"
+              >
+                <Icon className="text-2xl text-accent-primary smooth-transition" />
+              </motion.div>
 
               {/* Label */}
               <p className="text-text-muted text-xs font-mono mb-2 uppercase tracking-wider relative z-10">

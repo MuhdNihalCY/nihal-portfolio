@@ -2,6 +2,7 @@ import { motion } from 'framer-motion'
 import { useScrollAnimation } from '../hooks/useScrollAnimation'
 import { experiences } from '../data/experience'
 import { FaCalendarAlt, FaBuilding, FaArrowRight } from 'react-icons/fa'
+import { Parallax } from './Parallax'
 
 const Experience = () => {
   const { ref, isInView } = useScrollAnimation()
@@ -40,13 +41,13 @@ const Experience = () => {
 
         <div className="space-y-12 lg:space-y-16">
           {experiences.map((exp, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, x: -30 }}
-              animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
-              transition={{ duration: 0.6, delay: 0.4 + index * 0.2 }}
-              className="relative lg:pl-24"
-            >
+            <Parallax key={index} speed={0.1 + index * 0.05} direction={index % 2 === 0 ? 'up' : 'down'}>
+              <motion.div
+                initial={{ opacity: 0, x: -30 }}
+                animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
+                transition={{ duration: 0.6, delay: 0.4 + index * 0.2 }}
+                className="relative lg:pl-24"
+              >
               {/* Timeline dot with pulse */}
               <div className="absolute left-0 top-8 hidden lg:block">
                 <div className="relative">
@@ -96,7 +97,8 @@ const Experience = () => {
                   </ul>
                 </div>
               </motion.div>
-            </motion.div>
+              </motion.div>
+            </Parallax>
           ))}
         </div>
       </div>

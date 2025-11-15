@@ -38,7 +38,7 @@ const Education = () => {
         animate={isInView ? { opacity: 1, scale: 1, y: 0 } : { opacity: 0, scale: 0.95, y: 30 }}
         transition={{ duration: 0.8, delay: 0.4 }}
         whileHover={{ y: -5, scale: 1.01 }}
-        className="bg-dark-elevated border-2 border-accent-primary/20 rounded-2xl p-8 sm:p-10 lg:p-12 relative overflow-hidden group hover:border-accent-primary/50 transition-all"
+        className="bg-dark-elevated border-2 border-accent-primary/20 rounded-2xl p-8 sm:p-10 lg:p-12 relative overflow-hidden group hover:border-accent-primary/50 transition-all hover-lift smooth-transition"
       >
         {/* Decorative corner elements */}
         <div className="absolute top-0 left-0 w-32 h-32 border-t-2 border-l-2 border-accent-primary/20 rounded-tl-2xl" />
@@ -62,21 +62,27 @@ const Education = () => {
 
         {/* Details grid */}
         <div className="grid sm:grid-cols-2 gap-4">
-          <div className="flex items-center gap-4 p-5 bg-dark-bg rounded-xl border-2 border-accent-primary/20 hover:border-accent-primary/50 transition-colors group/item">
-            <FaCalendarAlt className="text-accent-primary text-xl flex-shrink-0" />
+          <motion.div 
+            whileHover={{ x: 5 }}
+            className="flex items-center gap-4 p-5 bg-dark-bg rounded-xl border-2 border-accent-primary/20 hover:border-accent-primary/50 transition-colors group/item smooth-transition interactive-element"
+          >
+            <FaCalendarAlt className="text-accent-primary text-xl flex-shrink-0 smooth-transition" />
             <div>
               <div className="text-xs text-text-muted font-mono mb-1 uppercase">Year</div>
               <div className="text-lg font-bold text-text-primary">{education.year}</div>
             </div>
-          </div>
+          </motion.div>
           {education.gpa && (
-            <div className="flex items-center gap-4 p-5 bg-dark-bg rounded-xl border-2 border-accent-primary/20 hover:border-accent-primary/50 transition-colors group/item">
-              <FaAward className="text-accent-primary text-xl flex-shrink-0" />
+            <motion.div 
+              whileHover={{ x: 5 }}
+              className="flex items-center gap-4 p-5 bg-dark-bg rounded-xl border-2 border-accent-primary/20 hover:border-accent-primary/50 transition-colors group/item smooth-transition interactive-element"
+            >
+              <FaAward className="text-accent-primary text-xl flex-shrink-0 smooth-transition" />
               <div>
                 <div className="text-xs text-text-muted font-mono mb-1 uppercase">GPA</div>
                 <div className="text-lg font-bold text-text-primary">{education.gpa}</div>
               </div>
-            </div>
+            </motion.div>
           )}
         </div>
       </motion.div>

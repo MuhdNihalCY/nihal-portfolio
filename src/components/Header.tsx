@@ -51,16 +51,19 @@ const Header = () => {
 
           {/* Desktop Navigation - Compact for sidebar layout */}
           <nav className="hidden lg:flex items-center gap-6">
-            {navItems.map((item) => (
+            {navItems.map((item, index) => (
               <motion.button
                 key={item.id}
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: index * 0.05 }}
                 whileHover={{ y: -2 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => smoothScrollTo(item.id)}
-                className="text-text-secondary hover:text-accent-primary transition-colors text-sm font-medium relative group"
+                className="text-text-secondary hover:text-accent-primary transition-colors text-sm font-medium relative group smooth-transition"
               >
                 <span className="relative z-10">{item.label}</span>
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-accent-primary group-hover:w-full transition-all duration-300" />
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-accent-primary group-hover:w-full transition-all duration-300 ease-out" />
               </motion.button>
             ))}
           </nav>
@@ -68,13 +71,16 @@ const Header = () => {
           {/* Right side actions */}
           <div className="flex items-center gap-4">
             <motion.button
-              whileHover={{ scale: 1.05 }}
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.4, delay: 0.3 }}
+              whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => downloadResume(personal.resumeUrl)}
-              className="hidden sm:flex items-center gap-2 px-4 py-2 bg-accent-primary/10 border border-accent-primary/30 text-accent-primary font-medium text-xs sm:text-sm rounded-lg hover:border-accent-primary hover:bg-accent-primary/20 transition-all"
+              className="hidden sm:flex items-center gap-2 px-4 py-2 bg-accent-primary/10 border border-accent-primary/30 text-accent-primary font-medium text-xs sm:text-sm rounded-lg hover:border-accent-primary hover:bg-accent-primary/20 transition-all button-ripple smooth-transition"
               aria-label="Download Resume"
             >
-              <FaDownload />
+              <FaDownload className="smooth-transition" />
               <span>Resume</span>
             </motion.button>
 
@@ -100,17 +106,20 @@ const Header = () => {
             className="lg:hidden bg-dark-surface/95 backdrop-blur-xl border-t border-accent-primary/20 overflow-hidden"
           >
             <div className="px-4 py-6 space-y-4">
-              {navItems.map((item) => (
-                <button
+              {navItems.map((item, index) => (
+                <motion.button
                   key={item.id}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.3, delay: index * 0.05 }}
                   onClick={() => {
                     smoothScrollTo(item.id)
                     setIsMobileMenuOpen(false)
                   }}
-                  className="block w-full text-left text-text-secondary hover:text-accent-primary transition-colors font-medium py-2"
+                  className="block w-full text-left text-text-secondary hover:text-accent-primary transition-colors font-medium py-2 smooth-transition interactive-element"
                 >
                   {item.label}
-                </button>
+                </motion.button>
               ))}
               <button
                 onClick={() => {

@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion'
 import { FaEnvelope, FaPhone, FaLinkedin, FaGithub } from 'react-icons/fa'
 import { personal } from '../data/personal'
 
@@ -10,43 +11,49 @@ const Footer = () => {
         <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
           {/* Contact Info with Icons */}
           <div className="flex flex-wrap items-center justify-center sm:justify-start gap-4 sm:gap-6">
-            <a
+            <motion.a
               href={`mailto:${personal.email}`}
-              className="flex items-center gap-2 text-text-secondary hover:text-accent-primary transition-colors group"
+              whileHover={{ scale: 1.05, y: -2 }}
+              className="flex items-center gap-2 text-text-secondary hover:text-accent-primary transition-colors group smooth-transition interactive-element"
               aria-label="Email"
             >
-              <FaEnvelope className="text-accent-primary group-hover:scale-110 transition-transform" />
+              <FaEnvelope className="text-accent-primary group-hover:scale-110 transition-transform smooth-transition" />
               <span className="font-mono text-xs sm:text-sm hidden sm:inline">{personal.email}</span>
               <span className="font-mono text-xs sm:text-sm sm:hidden">Email</span>
-            </a>
-            <a
+            </motion.a>
+            <motion.a
               href={`tel:${personal.phone}`}
-              className="flex items-center gap-2 text-text-secondary hover:text-accent-primary transition-colors group"
+              whileHover={{ scale: 1.05, y: -2 }}
+              className="flex items-center gap-2 text-text-secondary hover:text-accent-primary transition-colors group smooth-transition interactive-element"
               aria-label="Phone"
             >
-              <FaPhone className="text-accent-primary group-hover:scale-110 transition-transform" />
+              <FaPhone className="text-accent-primary group-hover:scale-110 transition-transform smooth-transition" />
               <span className="font-mono text-xs sm:text-sm hidden sm:inline">{personal.phone}</span>
               <span className="font-mono text-xs sm:text-sm sm:hidden">Phone</span>
-            </a>
+            </motion.a>
             <div className="flex items-center gap-4">
-              <a
+              <motion.a
                 href={personal.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-text-secondary hover:text-accent-primary transition-colors hover:scale-110 transform"
+                whileHover={{ scale: 1.2, y: -3, rotate: 5 }}
+                whileTap={{ scale: 0.9 }}
+                className="text-text-secondary hover:text-accent-primary transition-colors smooth-transition interactive-element"
                 aria-label="LinkedIn"
               >
                 <FaLinkedin size={20} />
-              </a>
-              <a
+              </motion.a>
+              <motion.a
                 href={personal.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-text-secondary hover:text-accent-primary transition-colors hover:scale-110 transform"
+                whileHover={{ scale: 1.2, y: -3, rotate: -5 }}
+                whileTap={{ scale: 0.9 }}
+                className="text-text-secondary hover:text-accent-primary transition-colors smooth-transition interactive-element"
                 aria-label="GitHub"
               >
                 <FaGithub size={20} />
-              </a>
+              </motion.a>
             </div>
           </div>
 

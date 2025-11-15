@@ -1,8 +1,9 @@
 import { motion } from 'framer-motion'
-import { FaLinkedin, FaGithub, FaEnvelope, FaArrowDown, FaCode, FaRocket } from 'react-icons/fa'
+import { FaLinkedin, FaGithub, FaEnvelope, FaRocket } from 'react-icons/fa'
 import { personal } from '../data/personal'
 import { useTypewriter } from '../hooks/useTypewriter'
 import { smoothScrollTo } from '../utils/smoothScroll'
+import { Parallax } from './Parallax'
 
 const Hero = () => {
   const typewriterText = useTypewriter('Full-Stack Developer', 80)
@@ -24,19 +25,24 @@ const Hero = () => {
         />
       </div>
 
-      {/* Subtle background accents */}
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-accent-primary/5 rounded-full blur-3xl" />
-      <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-accent-primary/3 rounded-full blur-3xl" />
+      {/* Subtle background accents with parallax */}
+      <Parallax speed={0.3} direction="up" className="absolute top-1/4 left-1/4 w-96 h-96 bg-accent-primary/5 rounded-full blur-3xl" />
+      <Parallax speed={0.5} direction="down" className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-accent-primary/3 rounded-full blur-3xl" />
+      
+      {/* Additional floating decorative elements */}
+      <Parallax speed={0.2} direction="up" className="absolute top-1/2 right-1/3 w-64 h-64 bg-accent-primary/2 rounded-full blur-3xl" />
+      <Parallax speed={0.4} direction="down" className="absolute bottom-1/3 left-1/3 w-72 h-72 bg-accent-primary/2 rounded-full blur-3xl" />
 
       <div className="container mx-auto relative z-10 max-w-7xl">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center min-h-[85vh]">
           {/* Left - Main content with unique styling */}
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            className="space-y-8 lg:space-y-10 relative"
-          >
+          <Parallax speed={0.15} direction="up">
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+              className="space-y-8 lg:space-y-10 relative"
+            >
             {/* Decorative corner accent */}
             <div className="absolute -top-4 -left-4 w-24 h-24 border-l-2 border-t-2 border-accent-primary/30" />
             <div className="absolute -bottom-4 -right-4 w-24 h-24 border-r-2 border-b-2 border-accent-primary/30" />
@@ -99,7 +105,7 @@ const Hero = () => {
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => smoothScrollTo('projects')}
-                className="px-8 py-4 bg-accent-primary text-white font-bold rounded-lg shadow-lg hover:bg-accent-primary/90 transition-colors"
+                className="px-8 py-4 bg-accent-primary text-white font-bold rounded-lg shadow-lg hover:bg-accent-primary/90 transition-colors button-ripple smooth-transition"
               >
                 View Projects
               </motion.button>
@@ -107,7 +113,7 @@ const Hero = () => {
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => smoothScrollTo('contact')}
-                className="px-8 py-4 bg-dark-elevated border-2 border-accent-primary text-accent-primary font-bold rounded-lg hover:bg-accent-primary/10 transition-all relative overflow-hidden"
+                className="px-8 py-4 bg-dark-elevated border-2 border-accent-primary text-accent-primary font-bold rounded-lg hover:bg-accent-primary/10 transition-all relative overflow-hidden button-ripple smooth-transition border-glow"
               >
                 Get In Touch
               </motion.button>
@@ -131,30 +137,35 @@ const Hero = () => {
                   return (
                     <motion.a
                       key={idx}
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ duration: 0.4, delay: 1.1 + idx * 0.1 }}
                       whileHover={{ scale: 1.2, y: -3, rotate: 5 }}
                       whileTap={{ scale: 0.9 }}
                       href={social.href}
                       target={social.href.startsWith('mailto') ? undefined : '_blank'}
                       rel={social.href.startsWith('mailto') ? undefined : 'noopener noreferrer'}
-                      className="w-12 h-12 flex items-center justify-center rounded-lg bg-dark-elevated border-2 border-accent-primary/30 text-text-secondary hover:text-accent-primary hover:border-accent-primary transition-all relative group"
+                      className="w-12 h-12 flex items-center justify-center rounded-lg bg-dark-elevated border-2 border-accent-primary/30 text-text-secondary hover:text-accent-primary hover:border-accent-primary transition-all relative group smooth-transition interactive-element"
                       aria-label={social.label}
                     >
-                      <Icon size={20} className="relative z-10" />
-                      <div className="absolute inset-0 bg-accent-primary/10 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity" />
+                      <Icon size={20} className="relative z-10 smooth-transition" />
+                      <div className="absolute inset-0 bg-accent-primary/10 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                     </motion.a>
                   )
                 })}
               </div>
             </motion.div>
-          </motion.div>
+            </motion.div>
+          </Parallax>
 
           {/* Right - Unique code block with stats */}
-          <motion.div
-            initial={{ opacity: 0, x: 50, rotateY: -10 }}
-            animate={{ opacity: 1, x: 0, rotateY: 0 }}
-            transition={{ duration: 1, delay: 0.4 }}
-            className="hidden lg:block relative"
-          >
+          <Parallax speed={0.25} direction="down">
+            <motion.div
+              initial={{ opacity: 0, x: 50, rotateY: -10 }}
+              animate={{ opacity: 1, x: 0, rotateY: 0 }}
+              transition={{ duration: 1, delay: 0.4 }}
+              className="hidden lg:block relative"
+            >
             <div className="bg-dark-elevated border-2 border-accent-primary/30 rounded-2xl p-8 shadow-2xl relative overflow-hidden transform perspective-1000">
               {/* Terminal header */}
               <div className="flex items-center gap-3 mb-6 pb-4 border-b-2 border-accent-primary/20">
@@ -212,65 +223,12 @@ const Hero = () => {
                 ))}
               </div>
             </div>
-          </motion.div>
+            </motion.div>
+          </Parallax>
         </div>
 
         {/* Unique scroll indicator - Floating text with arrow */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 1.5 }}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2"
-        >
-          <motion.button
-            onClick={() => smoothScrollTo('about')}
-            className="group relative flex flex-col items-center gap-3"
-          >
-            {/* Animated dots trail */}
-            <div className="flex items-center gap-2">
-              {[0, 1, 2].map((i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 0 }}
-                  animate={{ 
-                    opacity: [0, 1, 0],
-                    y: [0, 10, 20]
-                  }}
-                  transition={{
-                    duration: 1.5,
-                    repeat: Infinity,
-                    delay: i * 0.2,
-                    ease: "easeOut"
-                  }}
-                  className="w-1.5 h-1.5 bg-accent-primary rounded-full"
-                />
-              ))}
-            </div>
-            
-            {/* Text with underline animation */}
-            <div className="relative">
-              <span className="text-sm font-mono text-text-muted group-hover:text-accent-primary transition-colors">
-                Explore
-              </span>
-              <motion.div
-                className="absolute -bottom-1 left-0 h-0.5 bg-accent-primary"
-                initial={{ width: 0 }}
-                whileHover={{ width: "100%" }}
-                transition={{ duration: 0.3 }}
-              />
-            </div>
-            
-            {/* Unique arrow design */}
-            <motion.div
-              animate={{ y: [0, 5, 0] }}
-              transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-              className="flex flex-col items-center gap-1"
-            >
-              <div className="w-6 h-6 border-r-2 border-b-2 border-accent-primary/50 rotate-45 group-hover:border-accent-primary transition-colors" />
-              <div className="w-4 h-4 border-r-2 border-b-2 border-accent-primary/30 rotate-45 group-hover:border-accent-primary transition-colors" />
-            </motion.div>
-          </motion.button>
-        </motion.div>
+       
       </div>
     </section>
   )

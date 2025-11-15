@@ -2,6 +2,7 @@ import { motion } from 'framer-motion'
 import { FaGithub, FaExternalLinkAlt, FaCode, FaRocket } from 'react-icons/fa'
 import { useScrollAnimation } from '../hooks/useScrollAnimation'
 import { projects } from '../data/projects'
+import { Parallax } from './Parallax'
 
 const Projects = () => {
   const { ref, isInView } = useScrollAnimation()
@@ -36,15 +37,15 @@ const Projects = () => {
       {/* Projects list */}
       <div className="space-y-6 lg:space-y-8">
         {projects.map((project, index) => (
-          <motion.div
-            key={index}
-            initial={{ opacity: 0, y: 50, scale: 0.95 }}
-            animate={isInView ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 50, scale: 0.95 }}
-            transition={{ duration: 0.6, delay: 0.4 + index * 0.15 }}
-            whileHover={{ y: -5, scale: 1.01 }}
-            className="w-full"
-          >
-            <div className="bg-dark-elevated border-2 border-accent-primary/20 rounded-2xl p-6 sm:p-8 lg:p-10 group hover:border-accent-primary/50 transition-all relative overflow-hidden">
+          <Parallax key={index} speed={0.1 + index * 0.05} direction={index % 2 === 0 ? 'up' : 'down'}>
+            <motion.div
+              initial={{ opacity: 0, y: 50, scale: 0.95 }}
+              animate={isInView ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 50, scale: 0.95 }}
+              transition={{ duration: 0.6, delay: 0.4 + index * 0.15 }}
+              whileHover={{ y: -5, scale: 1.01 }}
+              className="w-full"
+            >
+            <div className="bg-dark-elevated border-2 border-accent-primary/20 rounded-2xl p-6 sm:p-8 lg:p-10 group hover:border-accent-primary/50 transition-all relative overflow-hidden hover-lift smooth-transition">
               {/* Hover overlay */}
               <div className="absolute top-0 right-0 w-40 h-40 bg-accent-primary/5 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity" />
 
@@ -90,10 +91,10 @@ const Projects = () => {
                         href={project.githubUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center gap-2 text-text-secondary hover:text-accent-primary transition-colors text-sm sm:text-base font-mono font-semibold"
+                        className="flex items-center gap-2 text-text-secondary hover:text-accent-primary transition-colors text-sm sm:text-base font-mono font-semibold link-underline smooth-transition interactive-element"
                         aria-label="View on GitHub"
                       >
-                        <FaGithub />
+                        <FaGithub className="smooth-transition" />
                         <span>Code</span>
                       </motion.a>
                       {project.liveUrl && (
@@ -103,10 +104,10 @@ const Projects = () => {
                           href={project.liveUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex items-center gap-2 text-text-secondary hover:text-accent-primary transition-colors text-sm sm:text-base font-mono font-semibold"
+                          className="flex items-center gap-2 text-text-secondary hover:text-accent-primary transition-colors text-sm sm:text-base font-mono font-semibold link-underline smooth-transition interactive-element"
                           aria-label="View Live"
                         >
-                          <FaExternalLinkAlt />
+                          <FaExternalLinkAlt className="smooth-transition" />
                           <span>Live</span>
                         </motion.a>
                       )}
@@ -115,7 +116,8 @@ const Projects = () => {
                 </div>
               </div>
             </div>
-          </motion.div>
+            </motion.div>
+          </Parallax>
         ))}
       </div>
     </motion.div>
