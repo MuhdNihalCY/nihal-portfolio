@@ -10,7 +10,7 @@ const Hero = () => {
   return (
     <section
       id="hero"
-      className="min-h-screen flex items-center justify-center relative px-4 sm:px-6 lg:px-8 overflow-hidden pt-20"
+      className="min-h-[70vh] lg:min-h-[85vh] flex items-center justify-center relative px-4 sm:px-6 lg:px-8 overflow-hidden pt-20"
     >
       {/* Diagonal split background */}
       <div className="absolute inset-0">
@@ -177,7 +177,7 @@ const Hero = () => {
                 <div className="ml-4">
                   <span className="text-accent-primary">name</span>
                   <span className="text-text-secondary">:</span>{' '}
-                  <span className="text-text-primary">"{personal.name.split(' ')[0]}"</span>
+                  <span className="text-text-primary">"{personal.name.split(' ').join(' ')}"</span>
                   <span className="text-text-secondary">,</span>
                 </div>
                 <div className="ml-4">
@@ -189,7 +189,7 @@ const Hero = () => {
                 <div className="ml-4">
                   <span className="text-accent-primary">experience</span>
                   <span className="text-text-secondary">:</span>{' '}
-                  <span className="text-accent-primary">5+</span>
+                  <span className="text-accent-primary">3+</span>
                   <span className="text-text-secondary"> years</span>
                 </div>
                 <div>

@@ -22,6 +22,7 @@ const Header = () => {
     { id: 'experience', label: 'Experience' },
     { id: 'projects', label: 'Projects' },
     { id: 'skills', label: 'Skills' },
+    { id: 'education', label: 'Education' },
     { id: 'contact', label: 'Contact' },
   ]
 
@@ -48,8 +49,8 @@ const Header = () => {
             {'<NCY />'}
           </motion.button>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-8">
+          {/* Desktop Navigation - Compact for sidebar layout */}
+          <nav className="hidden lg:flex items-center gap-6">
             {navItems.map((item) => (
               <motion.button
                 key={item.id}
