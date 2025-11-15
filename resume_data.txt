@@ -1,0 +1,44 @@
+Muhammed Nihal C Y
+FULL-STACK DEvELOPER
+Kerala, India +919526853280 mnihalcy@gmail.com https:/ /mnihalcy.netlify.app/ Git
+Experience Zennode Technologies
+Software Engineer
+March 2024 – Present
+As a Software Engineer, developed and maintained high-performance WordPress plugins
+used by over 500,000 brands globally, driving scalability and exceptional user experiences.
+Built and customized responsive static websites and WordPress themes optimized for
+performance, SEO, and accessibility. Collaborated cross-functionally with analysts,
+designers, and project managers to deliver data-driven, client-focused digital solutions.
+Troubleshot and optimized plugin and site performance to ensure reliability and efficiency
+across platforms. Contributed to feature development that enhanced user engagement and
+retention, while engineering custom plugins and internal tools to streamline workflows and
+simplify content management processes.
+Freelance
+Full Stack Developer
+April 2022 – March 2024
+Developed and deployed scalable ERP and CRM web applications with intuitive, user-
+focused interfaces. Led front-end development using React, TypeScript, Tailwind CSS,
+Handlebars.js, HTML, CSS, Bootstrap, and JavaScript to create responsive and high-
+performance user experiences. Designed and implemented GraphQL and RESTful APIs with
+Node.js and Express.js, integrating seamlessly with PostgreSQL databases for efficient data
+management. Collaborated within Agile/Scrum teams to deliver high-quality software on
+schedule, leveraging Git and GitHub for version control and continuous integration.
+Projects Online Hotel Room Booking System
+https:/ /github.com/MuhdNihalCY/Hotel-Booking-Sysytem
+Designed and developed a full-featured hotel booking system using Node.js, Express.js, and
+MongoDB, delivering a secure, scalable, and efficient platform. Built a responsive and
+interactive user interface with HTML, CSS, Bootstrap, jQuery, and AJAX to ensure a
+seamless booking experience across devices. Implemented email verification using
+Nodemailer and incorporated robust password encryption to enhance data security and
+user trust. Deployed the application using Docker for containerised scalability and
+streamlined environment management.
+Education Government Polytechnic College, Kunnamkulam, Kerala
+Computer Engineering
+7.88
+2023
+Diploma
+Skills React.js, Handlebars.js, HTML, CSS, Bootstrap, Tailwind
+Node.js, Express.js, PHP , WordPress (Plugin & Theme Development), MySQL, MongoDB, Docker, AWS,
+DigitalOcean, Git, REST APIs, GraphQL, PostgreSQL, MVC, Micro Front-End Strategy, TDD
+Languages English
+Malayalam

@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://mnihalcy.netlify.app/sitemap.xml
+
