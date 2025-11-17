@@ -112,25 +112,35 @@ const Header = () => {
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.3, delay: index * 0.05 }}
-                  onClick={() => {
-                    smoothScrollTo(item.id)
+                  onClick={(e) => {
+                    e.preventDefault()
+                    e.stopPropagation()
+                    // Close menu immediately on mobile to avoid interference
                     setIsMobileMenuOpen(false)
+                    // Small delay to ensure menu closes before scrolling
+                    setTimeout(() => {
+                      smoothScrollTo(item.id)
+                    }, 100)
                   }}
                   className="block w-full text-left text-text-secondary hover:text-accent-primary transition-colors font-medium py-2 smooth-transition interactive-element"
                 >
                   {item.label}
                 </motion.button>
               ))}
-              <button
-                onClick={() => {
+              <motion.button
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.3, delay: navItems.length * 0.05 }}
+                onClick={(e) => {
+                  e.preventDefault()
                   downloadResume(personal.resumeUrl)
                   setIsMobileMenuOpen(false)
                 }}
-                className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-accent-primary/10 border border-accent-primary/30 text-accent-primary font-medium text-sm mt-4 rounded-lg"
+                className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-accent-primary/10 border border-accent-primary/30 text-accent-primary font-medium text-sm mt-4 rounded-lg hover:bg-accent-primary/20 hover:border-accent-primary transition-all"
               >
                 <FaDownload />
                 <span>Download Resume</span>
-              </button>
+              </motion.button>
             </div>
           </motion.div>
         )}

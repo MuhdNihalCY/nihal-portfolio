@@ -110,7 +110,7 @@ const Contact = () => {
               </p>
 
               {/* Value */}
-              <p className="text-text-primary font-semibold text-sm sm:text-base group-hover:text-accent-primary transition-colors break-all relative z-10">
+              <p className={`text-text-primary font-semibold text-sm sm:text-base group-hover:text-accent-primary transition-colors ${item.label === 'Location' ? 'whitespace-pre-line' : 'break-all'} relative z-10`}>
                 {item.value}
               </p>
             </motion.a>
