@@ -13,7 +13,7 @@
   height: 100%;
   background: linear-gradient(
     transparent 50%,
-    rgba(59, 130, 246, 0.02) 50%
+    rgba(96, 165, 250, 0.02) 50%
   );
   background-size: 100% 4px;
   pointer-events: none;
@@ -47,14 +47,14 @@
 
 .glitch::before {
   left: 2px;
-  text-shadow: -2px 0 rgba(59, 130, 246, 0.6);
+  text-shadow: -2px 0 rgba(96, 165, 250, 0.6);
   clip: rect(44px, 450px, 56px, 0);
   animation: glitch-anim 5s infinite linear alternate-reverse;
 }
 
 .glitch::after {
   left: -2px;
-  text-shadow: 2px 0 rgba(6, 182, 212, 0.6);
+  text-shadow: 2px 0 rgba(129, 140, 248, 0.6);
   clip: rect(44px, 450px, 56px, 0);
   animation: glitch-anim-2 1s infinite linear alternate-reverse;
 }
@@ -254,30 +254,30 @@
 /* Modern Glow */
 .retro-glow {
   text-shadow: 
-    0 0 5px rgba(59, 130, 246, 0.3),
-    0 0 10px rgba(59, 130, 246, 0.2);
+    0 0 5px rgba(96, 165, 250, 0.3),
+    0 0 10px rgba(96, 165, 250, 0.2);
 }
 
 .retro-glow-hover:hover {
   text-shadow: 
-    0 0 10px rgba(59, 130, 246, 0.5),
-    0 0 20px rgba(6, 182, 212, 0.3);
+    0 0 10px rgba(96, 165, 250, 0.5),
+    0 0 20px rgba(129, 140, 248, 0.3);
   transition: text-shadow 0.3s ease;
 }
 
 /* Modern Border */
 .retro-border {
-  border: 2px solid rgba(59, 130, 246, 0.2);
+  border: 2px solid rgba(96, 165, 250, 0.2);
   box-shadow: 
-    inset 0 0 10px rgba(59, 130, 246, 0.05),
-    0 0 20px rgba(59, 130, 246, 0.05);
+    inset 0 0 10px rgba(96, 165, 250, 0.05),
+    0 0 20px rgba(96, 165, 250, 0.05);
 }
 
 .retro-border-hover:hover {
-  border-color: rgba(59, 130, 246, 0.4);
+  border-color: rgba(96, 165, 250, 0.4);
   box-shadow: 
-    inset 0 0 20px rgba(59, 130, 246, 0.1),
-    0 0 30px rgba(6, 182, 212, 0.1);
+    inset 0 0 20px rgba(96, 165, 250, 0.1),
+    0 0 30px rgba(129, 140, 248, 0.1);
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 

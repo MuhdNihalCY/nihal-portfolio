@@ -12,7 +12,7 @@ export default {
         'dark-surface': '#151515',
         'dark-elevated': '#1a1a1a',
         'dark-card': '#1f1f1f',
-        'accent-primary': '#60a5fa',
+        'accent-primary': '#60a5fa', // Blue color - rgb(96, 165, 250)
         'accent-secondary': '#818cf8',
         'accent-tertiary': '#a78bfa',
         'accent-success': '#34d399',
@@ -48,8 +48,8 @@ export default {
           '100%': { transform: 'translateY(100vh)' },
         },
         glow: {
-          '0%': { textShadow: '0 0 5px rgba(59, 130, 246, 0.3)' },
-          '100%': { textShadow: '0 0 20px rgba(59, 130, 246, 0.5), 0 0 30px rgba(6, 182, 212, 0.3)' },
+          '0%': { textShadow: '0 0 5px rgba(96, 165, 250, 0.3)' },
+          '100%': { textShadow: '0 0 20px rgba(96, 165, 250, 0.5), 0 0 30px rgba(129, 140, 248, 0.3)' },
         },
       },
     },
