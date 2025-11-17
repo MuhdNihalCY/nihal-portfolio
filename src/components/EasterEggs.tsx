@@ -71,31 +71,6 @@ const EasterEggs = () => {
         )}
       </AnimatePresence>
 
-      {/* Pulsing circles for long-press */}
-      <AnimatePresence>
-        {activeEffects.includes('long-press') && (
-          <div className="fixed inset-0 pointer-events-none z-[100] flex items-center justify-center">
-            {[0, 1, 2].map((i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, scale: 0 }}
-                animate={{
-                  opacity: [0, 0.3, 0],
-                  scale: [0, 2, 3],
-                }}
-                exit={{ opacity: 0 }}
-                transition={{
-                  duration: 2,
-                  repeat: Infinity,
-                  delay: i * 0.6,
-                  ease: 'easeOut',
-                }}
-                className="absolute w-96 h-96 rounded-full border-2 border-accent-secondary/30"
-              />
-            ))}
-          </div>
-        )}
-      </AnimatePresence>
 
       {/* Minimal explorer effects */}
       <AnimatePresence>
