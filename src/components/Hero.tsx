@@ -213,9 +213,9 @@ const Hero = () => {
               {/* Stats grid with unique design */}
               <div className="grid grid-cols-3 gap-4 pt-6 border-t-2 border-accent-primary/20">
                 {[
-                  { label: 'Projects', value: '50+' },
-                  { label: 'Experience', value: '5+' },
-                  { label: 'Skills', value: '20+' },
+                  { label: 'Projects', value: '4+' },
+                  { label: 'Experience', value: '3+' },
+                  { label: 'Skills', value: '25+' },
                 ].map((stat, idx) => (
                   <div key={idx} className="text-center p-3 bg-dark-bg rounded-lg border border-accent-primary/20">
                     <div className="text-2xl font-bold mb-1 text-accent-primary">{stat.value}</div>
