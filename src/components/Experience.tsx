@@ -25,7 +25,7 @@ const Experience = () => {
         <div className="flex items-center gap-4 mb-6">
           <div className="h-px flex-1 bg-accent-primary/30" />
           <span className="px-5 py-2 bg-dark-elevated border-2 border-accent-primary rounded-lg">
-            <span className="text-sm font-mono text-accent-primary font-bold">02</span>
+            <span className="text-sm font-mono text-accent-primary font-bold">Experience</span>
           </span>
           <div className="h-px flex-1 bg-accent-primary/30" />
         </div>

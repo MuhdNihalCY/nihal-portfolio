@@ -46,7 +46,7 @@ const About = () => {
             transition={{ duration: 0.5, delay: 0.5 }}
             className="px-5 py-2 bg-dark-elevated border-2 border-accent-primary rounded-lg subtle-pulse"
           >
-            <span className="text-sm font-mono text-accent-primary font-bold">01</span>
+            <span className="text-sm font-mono text-accent-primary font-bold">About</span>
           </motion.span>
           <motion.div 
             initial={{ width: 0 }}
