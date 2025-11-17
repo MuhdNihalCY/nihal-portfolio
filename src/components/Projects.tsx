@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { FaGithub, FaExternalLinkAlt, FaCode, FaRocket } from 'react-icons/fa'
+import { FaGithub, FaExternalLinkAlt, FaRocket } from 'react-icons/fa'
 import { useScrollAnimation } from '../hooks/useScrollAnimation'
 import { projects } from '../data/projects'
 import { Parallax } from './Parallax'

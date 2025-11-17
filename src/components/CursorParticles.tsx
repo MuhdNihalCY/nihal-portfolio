@@ -14,7 +14,6 @@ interface Particle {
 
 const CursorParticles = () => {
   const [particles, setParticles] = useState<Particle[]>([])
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 })
   const particleIdRef = useRef(0)
   const animationFrameRef = useRef<number | null>(null)
   const containerRef = useRef<HTMLDivElement>(null)
@@ -22,8 +21,6 @@ const CursorParticles = () => {
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
-      setMousePos({ x: e.clientX, y: e.clientY })
-
       // Throttle particle creation
       const now = Date.now()
       if (now - lastParticleTime.current < 50) return // Create particle every 50ms

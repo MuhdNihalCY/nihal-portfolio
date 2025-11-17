@@ -1,4 +1,4 @@
-import { ReactNode } from 'react'
+import { ReactNode, CSSProperties, ElementType } from 'react'
 import { useParallax } from '../hooks/useParallax'
 
 interface ParallaxProps {
@@ -8,7 +8,8 @@ interface ParallaxProps {
   disabled?: boolean
   offset?: number
   className?: string
-  as?: keyof JSX.IntrinsicElements
+  style?: CSSProperties
+  as?: ElementType
 }
 
 export const Parallax = ({
@@ -18,12 +19,13 @@ export const Parallax = ({
   disabled = false,
   offset = 0,
   className = '',
+  style: externalStyle,
   as: Component = 'div',
 }: ParallaxProps) => {
-  const { ref, style } = useParallax({ speed, direction, disabled, offset })
+  const { ref, style: parallaxStyle } = useParallax({ speed, direction, disabled, offset })
 
   return (
-    <Component ref={ref as any} style={style} className={className}>
+    <Component ref={ref} style={{ ...parallaxStyle, ...externalStyle }} className={className}>
       {children}
     </Component>
   )

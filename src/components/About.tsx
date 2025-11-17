@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import { useScrollAnimation } from '../hooks/useScrollAnimation'
-import { FaCode, FaRocket, FaUsers, FaLightbulb, FaChartLine } from 'react-icons/fa'
+import { FaCode, FaRocket, FaUsers, FaLightbulb } from 'react-icons/fa'
 import { Parallax } from './Parallax'
 
 const About = () => {

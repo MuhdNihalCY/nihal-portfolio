@@ -18,7 +18,7 @@ export const useInteractionTracker = () => {
   })
 
   const [easterEggs, setEasterEggs] = useState<string[]>([])
-  const longPressTimer = useRef<NodeJS.Timeout | null>(null)
+  const longPressTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
   const startTime = useRef<number>(Date.now())
   const maxScroll = useRef<number>(0)
 

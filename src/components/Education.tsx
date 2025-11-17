@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import { useScrollAnimation } from '../hooks/useScrollAnimation'
 import { education } from '../data/education'
-import { FaGraduationCap, FaCalendarAlt, FaAward, FaUniversity } from 'react-icons/fa'
+import { FaGraduationCap, FaCalendarAlt, FaAward } from 'react-icons/fa'
 
 const Education = () => {
   const { ref, isInView } = useScrollAnimation()

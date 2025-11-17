@@ -91,6 +91,7 @@ const Hero = () => {
               className="text-lg sm:text-xl text-text-secondary max-w-xl leading-relaxed pl-4 border-l-2 border-accent-primary/30"
             >
               Building exceptional digital experiences with modern technologies. 
+              Developed WordPress plugins used by over <span className="text-accent-primary font-bold">500,000 brands</span> globally. 
               Passionate about creating scalable solutions that make an impact.
             </motion.p>
 

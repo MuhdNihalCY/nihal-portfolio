@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { useInteractionTracker } from '../hooks/useInteractionTracker'
 
 const EasterEggs = () => {
-  const { stats, easterEggs } = useInteractionTracker()
+  const { easterEggs } = useInteractionTracker()
   const [activeEffects, setActiveEffects] = useState<string[]>([])
   const [showNotification, setShowNotification] = useState(false)
   const [notificationText, setNotificationText] = useState('')

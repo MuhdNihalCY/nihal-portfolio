@@ -4,9 +4,9 @@ export const projects: Project[] = [
   {
     title: 'Online Hotel Room Booking System',
     description:
-      'Designed and developed a full-featured hotel booking system using Node.js, Express.js, and MongoDB, delivering a secure, scalable, and efficient platform. Built a responsive and interactive user interface with HTML, CSS, Bootstrap, jQuery, and AJAX to ensure a seamless booking experience across devices. Implemented email verification using Nodemailer and incorporated robust password encryption to enhance data security and user trust. Deployed the application using Docker for containerised scalability and streamlined environment management.',
+      'A comprehensive full-stack hotel booking platform built with modern web technologies. Features secure user authentication with email verification, real-time room availability checking, and seamless booking management. The system includes admin dashboard for hotel management, customer booking history, and payment integration. Built with responsive design principles ensuring optimal experience across all devices.',
     githubUrl: 'https://github.com/MuhdNihalCY/Hotel-Booking-Sysytem',
-    technologies: ['Node.js', 'Express.js', 'MongoDB', 'Docker', 'HTML', 'CSS', 'Bootstrap', 'jQuery'],
+    technologies: ['Node.js', 'Express.js', 'MongoDB', 'Docker', 'HTML', 'CSS', 'Bootstrap', 'jQuery', 'AJAX', 'Nodemailer'],
   },
 ]
 
