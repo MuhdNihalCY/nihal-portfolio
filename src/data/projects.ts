@@ -2,6 +2,14 @@ import { Project } from '../types'
 
 export const projects: Project[] = [
   {
+    title: 'Content Freshness Monitor — WordPress Plugin',
+    description:
+      'Published an SEO-focused WordPress plugin on the official WordPress.org repository to combat content decay. Features smart content age monitoring with color-coded dashboard (Fresh/Aging/Stale/Very Stale), privacy-focused analytics engine tracking user engagement and time-on-page metrics, and automated background Cron jobs for performance optimization. Implemented role-based exclusion, CSV export functionality, and GDPR-compliant IP anonymization. Built with custom database tables ensuring zero impact on site performance. Designed premium UI with card layouts, toggle switches, and live data caching.',
+    githubUrl: 'https://wordpress.org/plugins/zevvolabs-content-update-monitor/',
+    liveUrl: 'https://wordpress.org/plugins/zevvolabs-content-update-monitor/',
+    technologies: ['PHP', 'WordPress', 'MySQL', 'JavaScript', 'AJAX', 'WP Cron', 'Custom DB Tables'],
+  },
+  {
     title: 'AI Humanizer Pro — GPT Action Plugin',
     description:
       'Built and deployed a free AI text detection & humanization plugin integrated with ChatGPT as a custom GPT Action. Developed a Node.js/Express REST API hosted on Railway with AI detection engine scoring text 0–100 for AI probability. Implemented NLP-based humanization with 3 rewrite modes (light / medium / aggressive) using synonym mapping, contraction restoration and sentence restructuring. Designed OpenAPI 3.1 spec enabling seamless ChatGPT integration with zero authentication required (public & free). Built-in rate limiting, privacy policy, and live health monitoring.',
