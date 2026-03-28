@@ -21,9 +21,12 @@ export interface Experience {
 export interface Project {
   title: string
   description: string
-  githubUrl: string
+  githubUrl?: string
   technologies: string[]
   liveUrl?: string
+  badge?: string
+  highlights?: string[]
+  stats?: { label: string; value: string }[]
 }
 
 export interface Skill {

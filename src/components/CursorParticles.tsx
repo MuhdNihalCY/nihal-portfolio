@@ -1,130 +1,123 @@
-import { useEffect, useState, useRef } from 'react'
-import { motion } from 'framer-motion'
+import { useEffect, useRef } from 'react'
 
 interface Particle {
-  id: number
   x: number
   y: number
   vx: number
   vy: number
   life: number
   size: number
-  color: string
+  r: number
+  g: number
+  b: number
 }
 
+const COLORS = [
+  { r: 96, g: 165, b: 250 },
+  { r: 129, g: 140, b: 248 },
+]
+
 const CursorParticles = () => {
-  const [particles, setParticles] = useState<Particle[]>([])
-  const particleIdRef = useRef(0)
-  const animationFrameRef = useRef<number | null>(null)
-  const containerRef = useRef<HTMLDivElement>(null)
-  const lastParticleTime = useRef(0)
+  const canvasRef = useRef<HTMLCanvasElement>(null)
 
   useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      // Throttle particle creation
-      const now = Date.now()
-      if (now - lastParticleTime.current < 50) return // Create particle every 50ms
-      lastParticleTime.current = now
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    // No cursor on touch devices
+    if (window.matchMedia('(pointer: coarse)').matches) return
 
-      // Create 2-3 random particles at cursor position
-      const particleCount = Math.floor(Math.random() * 2) + 2
-      const newParticles: Particle[] = []
+    const canvas = canvasRef.current
+    if (!canvas) return
+    const ctx = canvas.getContext('2d')
+    if (!ctx) return
 
-      for (let i = 0; i < particleCount; i++) {
-        const angle = (Math.PI * 2 * i) / particleCount + Math.random() * 0.5
+    let width = window.innerWidth
+    let height = window.innerHeight
+    canvas.width = width
+    canvas.height = height
+
+    const particles: Particle[] = []
+    let lastTime = 0
+    let rafId: number
+
+    const onResize = () => {
+      width = window.innerWidth
+      height = window.innerHeight
+      canvas.width = width
+      canvas.height = height
+    }
+
+    let lastParticleTime = 0
+    const onMouseMove = (e: MouseEvent) => {
+      const now = performance.now()
+      if (now - lastParticleTime < 50) return
+      lastParticleTime = now
+
+      const count = Math.floor(Math.random() * 2) + 2
+      for (let i = 0; i < count; i++) {
+        const angle = (Math.PI * 2 * i) / count + Math.random() * 0.5
         const speed = 0.5 + Math.random() * 1
-        const size = 2 + Math.random() * 3 // Random size between 2-5px
-        const colors = [
-          'rgba(96, 165, 250, 0.6)', // accent-primary
-          'rgba(129, 140, 248, 0.5)', // accent-secondary
-          'rgba(96, 165, 250, 0.4)', // lighter primary
-        ]
-        
-        newParticles.push({
-          id: particleIdRef.current++,
+        const color = COLORS[Math.floor(Math.random() * COLORS.length)]
+        particles.push({
           x: e.clientX + (Math.random() - 0.5) * 10,
           y: e.clientY + (Math.random() - 0.5) * 10,
           vx: Math.cos(angle) * speed,
           vy: Math.sin(angle) * speed,
           life: 1,
-          size,
-          color: colors[Math.floor(Math.random() * colors.length)],
+          size: 2 + Math.random() * 3,
+          r: color.r,
+          g: color.g,
+          b: color.b,
         })
+        if (particles.length > 60) particles.shift()
+      }
+    }
+
+    const animate = (now: number) => {
+      const dt = Math.min(now - lastTime, 32) / 16 // capped delta, normalised to ~60fps
+      lastTime = now
+
+      ctx.clearRect(0, 0, width, height)
+
+      for (let i = particles.length - 1; i >= 0; i--) {
+        const p = particles[i]
+        p.x += p.vx * dt
+        p.y += p.vy * dt
+        p.vx *= 0.97
+        p.vy *= 0.97
+        p.life -= 0.015 * dt
+
+        if (p.life <= 0) {
+          particles.splice(i, 1)
+          continue
+        }
+
+        ctx.beginPath()
+        ctx.arc(p.x, p.y, p.size * p.life, 0, Math.PI * 2)
+        ctx.fillStyle = `rgba(${p.r},${p.g},${p.b},${p.life * 0.6})`
+        ctx.fill()
       }
 
-      setParticles((prev) => {
-        const updated = [...prev, ...newParticles].slice(-50) // Keep last 50 particles
-        return updated
-      })
+      rafId = requestAnimationFrame(animate)
     }
 
-    window.addEventListener('mousemove', handleMouseMove, { passive: true })
-
-    // Animate particles
-    const animate = () => {
-      setParticles((prev) => {
-        return prev
-          .map((particle) => ({
-            ...particle,
-            x: particle.x + particle.vx,
-            y: particle.y + particle.vy,
-            life: particle.life - 0.015,
-            vx: particle.vx * 0.97, // Friction
-            vy: particle.vy * 0.97,
-          }))
-          .filter((particle) => particle.life > 0)
-      })
-
-      animationFrameRef.current = requestAnimationFrame(animate)
-    }
-
-    animationFrameRef.current = requestAnimationFrame(animate)
+    rafId = requestAnimationFrame(animate)
+    window.addEventListener('mousemove', onMouseMove, { passive: true })
+    window.addEventListener('resize', onResize, { passive: true })
 
     return () => {
-      window.removeEventListener('mousemove', handleMouseMove)
-      if (animationFrameRef.current) {
-        cancelAnimationFrame(animationFrameRef.current)
-      }
+      cancelAnimationFrame(rafId)
+      window.removeEventListener('mousemove', onMouseMove)
+      window.removeEventListener('resize', onResize)
     }
   }, [])
 
-  // Check for reduced motion
-  const prefersReducedMotion = typeof window !== 'undefined' 
-    ? window.matchMedia('(prefers-reduced-motion: reduce)').matches 
-    : false
-
-  if (prefersReducedMotion) {
-    return null
-  }
-
   return (
-    <div
-      ref={containerRef}
-      className="fixed inset-0 pointer-events-none z-[2] overflow-hidden"
+    <canvas
+      ref={canvasRef}
+      className="fixed inset-0 pointer-events-none z-[2]"
       aria-hidden="true"
-    >
-      {particles.map((particle) => (
-        <motion.div
-          key={particle.id}
-          className="absolute rounded-full"
-          style={{
-            left: `${particle.x}px`,
-            top: `${particle.y}px`,
-            width: `${particle.size}px`,
-            height: `${particle.size}px`,
-            backgroundColor: particle.color,
-            transform: 'translate(-50%, -50%)',
-            opacity: particle.life * 0.8,
-            boxShadow: `0 0 ${particle.size * 2}px ${particle.color}`,
-          }}
-          initial={{ scale: 0 }}
-          animate={{ scale: particle.life }}
-          transition={{ duration: 0.1 }}
-        />
-      ))}
-    </div>
+    />
   )
 }
 
 export default CursorParticles
-

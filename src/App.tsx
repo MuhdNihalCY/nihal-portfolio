@@ -1,24 +1,27 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, lazy, Suspense } from 'react'
 import { motion } from 'framer-motion'
 import { FaChevronDown } from 'react-icons/fa'
 import Header from './components/Header'
 import Hero from './components/Hero'
-import About from './components/About'
-import Experience from './components/Experience'
-import Projects from './components/Projects'
-import Skills from './components/Skills'
-import Education from './components/Education'
-import Contact from './components/Contact'
-import Footer from './components/Footer'
 import ErrorBoundary from './components/ErrorBoundary'
 import SEO from './components/SEO'
-import TextureOverlay from './components/TextureOverlay'
-import CursorParticles from './components/CursorParticles'
-import EasterEggs from './components/EasterEggs'
 import { smoothScrollTo } from './utils/smoothScroll'
 import { Parallax } from './components/Parallax'
 import './styles/globals.css'
 import './styles/retro-effects.css'
+
+// Lazy-load everything below the fold — these don't affect FCP
+const About = lazy(() => import('./components/About'))
+const Experience = lazy(() => import('./components/Experience'))
+const Projects = lazy(() => import('./components/Projects'))
+const Skills = lazy(() => import('./components/Skills'))
+const Education = lazy(() => import('./components/Education'))
+const Contact = lazy(() => import('./components/Contact'))
+const Footer = lazy(() => import('./components/Footer'))
+const TextureOverlay = lazy(() => import('./components/TextureOverlay'))
+const CursorParticles = lazy(() => import('./components/CursorParticles'))
+const EasterEggs = lazy(() => import('./components/EasterEggs'))
+const MouseTracker = lazy(() => import('./components/MouseTracker'))
 
 const App = () => {
   const [activeSection, setActiveSection] = useState('hero')
@@ -58,17 +61,15 @@ const App = () => {
     <ErrorBoundary>
       <SEO />
       <div className="min-h-screen bg-dark-bg overflow-x-hidden relative page-fade-in">
-        {/* Minimal Texture Overlay */}
-        <TextureOverlay />
-        
-        {/* Cursor Particles - Playable with cursor */}
-        <CursorParticles />
-        
-        {/* Easter Eggs - Fun Interactions */}
-        <EasterEggs />
-        
+        <Suspense fallback={null}>
+          <TextureOverlay />
+          <CursorParticles />
+          <EasterEggs />
+          <MouseTracker />
+        </Suspense>
+
         <Header />
-        
+
         {/* Floating Navigation Dots */}
         <nav className="fixed right-6 top-1/2 -translate-y-1/2 z-50 hidden lg:flex flex-col gap-3">
           {sections.map((section, index) => (
@@ -103,9 +104,9 @@ const App = () => {
           ))}
         </nav>
 
-        {/* Main Content - Diagonal Split Layout */}
+        {/* Main Content */}
         <main className="relative">
-          {/* Hero Section - Full Screen */}
+          {/* Hero Section — eager, renders immediately */}
           <section id="hero" className="min-h-screen relative">
             <Hero />
             <motion.div
@@ -119,76 +120,76 @@ const App = () => {
                 animate={{ y: [0, 10, 0] }}
                 transition={{ duration: 2, repeat: Infinity }}
                 className="text-accent-primary/60 hover:text-accent-primary transition-colors"
+                aria-label="Scroll to about section"
               >
                 <FaChevronDown size={24} />
               </motion.button>
             </motion.div>
           </section>
 
-          {/* About Section - Diagonal Split */}
-          <section id="about" className="min-h-screen relative flex items-center overflow-hidden">
-            <Parallax speed={0.2} direction="up" className="absolute inset-0 bg-dark-surface" style={{ clipPath: 'polygon(0 0, 100% 0, 100% 85%, 0 100%)' }} />
-            <Parallax speed={0.4} direction="down" className="absolute inset-0 bg-dark-elevated opacity-50" style={{ clipPath: 'polygon(0 0, 100% 0, 100% 15%, 0 100%)' }} />
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10">
-              <About />
-            </div>
-          </section>
+          {/* All sections below fold — lazy loaded */}
+          <Suspense fallback={null}>
+            {/* About Section */}
+            <section id="about" className="min-h-screen relative flex items-center overflow-hidden">
+              <Parallax speed={0.2} direction="up" className="absolute inset-0 bg-dark-surface" style={{ clipPath: 'polygon(0 0, 100% 0, 100% 85%, 0 100%)' }} />
+              <Parallax speed={0.4} direction="down" className="absolute inset-0 bg-dark-elevated opacity-50" style={{ clipPath: 'polygon(0 0, 100% 0, 100% 15%, 0 100%)' }} />
+              <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10">
+                <About />
+              </div>
+            </section>
 
-          {/* Experience Section - Diagonal Split Reverse */}
-          <section id="experience" className="min-h-screen relative flex items-center overflow-hidden">
-            <Parallax speed={0.25} direction="up" className="absolute inset-0 bg-dark-surface" style={{ clipPath: 'polygon(0 15%, 100% 0, 100% 100%, 0 85%)' }} />
-            <Parallax speed={0.35} direction="down" className="absolute inset-0 bg-dark-elevated opacity-50" style={{ clipPath: 'polygon(0 0, 100% 15%, 100% 100%, 0 100%)' }} />
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10">
-              <Experience />
-            </div>
-          </section>
+            {/* Experience Section */}
+            <section id="experience" className="min-h-screen relative flex items-center overflow-hidden">
+              <Parallax speed={0.25} direction="up" className="absolute inset-0 bg-dark-surface" style={{ clipPath: 'polygon(0 15%, 100% 0, 100% 100%, 0 85%)' }} />
+              <Parallax speed={0.35} direction="down" className="absolute inset-0 bg-dark-elevated opacity-50" style={{ clipPath: 'polygon(0 0, 100% 15%, 100% 100%, 0 100%)' }} />
+              <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10">
+                <Experience />
+              </div>
+            </section>
 
-          {/* Projects Section - Full Width */}
-          <section id="projects" className="min-h-screen relative flex items-center bg-dark-bg overflow-hidden">
-            {/* Floating decorative elements */}
-            <Parallax speed={0.3} direction="up" className="absolute top-1/4 left-1/6 w-72 h-72 bg-accent-primary/3 rounded-full blur-3xl" />
-            <Parallax speed={0.4} direction="down" className="absolute bottom-1/4 right-1/6 w-80 h-80 bg-accent-primary/2 rounded-full blur-3xl" />
-            <Parallax speed={0.25} direction="up" className="absolute top-1/2 right-1/4 w-64 h-64 bg-accent-primary/2 rounded-full blur-3xl" />
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10">
-              <Projects />
-            </div>
-          </section>
+            {/* Projects Section */}
+            <section id="projects" className="min-h-screen relative flex items-center bg-dark-bg overflow-hidden">
+              <Parallax speed={0.3} direction="up" className="absolute top-1/4 left-1/6 w-72 h-72 bg-accent-primary/3 rounded-full blur-3xl" />
+              <Parallax speed={0.4} direction="down" className="absolute bottom-1/4 right-1/6 w-80 h-80 bg-accent-primary/2 rounded-full blur-3xl" />
+              <Parallax speed={0.25} direction="up" className="absolute top-1/2 right-1/4 w-64 h-64 bg-accent-primary/2 rounded-full blur-3xl" />
+              <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10">
+                <Projects />
+              </div>
+            </section>
 
-          {/* Skills Section - Floating Panel Style */}
-          <section id="skills" className="min-h-screen relative flex items-center bg-dark-bg overflow-hidden">
-            {/* Floating decorative elements */}
-            <Parallax speed={0.35} direction="down" className="absolute top-1/3 left-1/5 w-96 h-96 bg-accent-primary/3 rounded-full blur-3xl" />
-            <Parallax speed={0.2} direction="up" className="absolute bottom-1/3 right-1/5 w-80 h-80 bg-accent-primary/2 rounded-full blur-3xl" />
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10">
-              <Skills />
-            </div>
-          </section>
+            {/* Skills Section */}
+            <section id="skills" className="min-h-screen relative flex items-center bg-dark-bg overflow-hidden">
+              <Parallax speed={0.35} direction="down" className="absolute top-1/3 left-1/5 w-96 h-96 bg-accent-primary/3 rounded-full blur-3xl" />
+              <Parallax speed={0.2} direction="up" className="absolute bottom-1/3 right-1/5 w-80 h-80 bg-accent-primary/2 rounded-full blur-3xl" />
+              <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10">
+                <Skills />
+              </div>
+            </section>
 
-          {/* Education Section - Diagonal Split */}
-          <section id="education" className="min-h-screen relative flex items-center overflow-hidden">
-            <Parallax speed={0.2} direction="up" className="absolute inset-0 bg-dark-surface" style={{ clipPath: 'polygon(0 0, 100% 0, 100% 85%, 0 100%)' }} />
-            <Parallax speed={0.4} direction="down" className="absolute inset-0 bg-dark-elevated opacity-50" style={{ clipPath: 'polygon(0 0, 100% 0, 100% 15%, 0 100%)' }} />
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10">
-              <Education />
-            </div>
-          </section>
+            {/* Education Section */}
+            <section id="education" className="min-h-screen relative flex items-center overflow-hidden">
+              <Parallax speed={0.2} direction="up" className="absolute inset-0 bg-dark-surface" style={{ clipPath: 'polygon(0 0, 100% 0, 100% 85%, 0 100%)' }} />
+              <Parallax speed={0.4} direction="down" className="absolute inset-0 bg-dark-elevated opacity-50" style={{ clipPath: 'polygon(0 0, 100% 0, 100% 15%, 0 100%)' }} />
+              <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10">
+                <Education />
+              </div>
+            </section>
 
-          {/* Contact Section - Full Width */}
-          <section id="contact" className="min-h-screen relative flex items-center bg-dark-bg overflow-hidden">
-            {/* Floating decorative elements */}
-            <Parallax speed={0.3} direction="up" className="absolute top-1/4 right-1/4 w-80 h-80 bg-accent-primary/2 rounded-full blur-3xl" />
-            <Parallax speed={0.4} direction="down" className="absolute bottom-1/4 left-1/4 w-72 h-72 bg-accent-primary/3 rounded-full blur-3xl" />
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10">
-              <Contact />
-            </div>
-          </section>
+            {/* Contact Section */}
+            <section id="contact" className="min-h-screen relative flex items-center bg-dark-bg overflow-hidden">
+              <Parallax speed={0.3} direction="up" className="absolute top-1/4 right-1/4 w-80 h-80 bg-accent-primary/2 rounded-full blur-3xl" />
+              <Parallax speed={0.4} direction="down" className="absolute bottom-1/4 left-1/4 w-72 h-72 bg-accent-primary/3 rounded-full blur-3xl" />
+              <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10">
+                <Contact />
+              </div>
+            </section>
+
+            <Footer />
+          </Suspense>
         </main>
-
-        <Footer />
       </div>
     </ErrorBoundary>
   )
 }
 
 export default App
-

@@ -1,83 +1,78 @@
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 
 const MouseTracker = () => {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
-  const [isVisible, setIsVisible] = useState(false)
-  const containerRef = useRef<HTMLDivElement>(null)
+  const blob1Ref = useRef<HTMLDivElement>(null)
+  const blob2Ref = useRef<HTMLDivElement>(null)
+  const blob3Ref = useRef<HTMLDivElement>(null)
   const rafRef = useRef<number | null>(null)
-  const targetPosition = useRef({ x: 0, y: 0 })
-  const currentPosition = useRef({ x: 0, y: 0 })
+  const targetPos = useRef({ x: 0, y: 0 })
+  const currentPos = useRef({ x: 0, y: 0 })
+  const visibleRef = useRef(false)
 
   useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      targetPosition.current = {
-        x: e.clientX,
-        y: e.clientY,
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    // No cursor on touch devices
+    if (window.matchMedia('(pointer: coarse)').matches) return
+
+    const setOpacity = (v: string) => {
+      if (blob1Ref.current) blob1Ref.current.style.opacity = v
+      if (blob2Ref.current) blob2Ref.current.style.opacity = v
+      if (blob3Ref.current) blob3Ref.current.style.opacity = v
+    }
+
+    const applyTransform = (x: number, y: number) => {
+      const t = `translate(calc(${x}px - 50%), calc(${y}px - 50%))`
+      if (blob1Ref.current) blob1Ref.current.style.transform = t
+      if (blob2Ref.current) blob2Ref.current.style.transform = t
+      if (blob3Ref.current) blob3Ref.current.style.transform = t
+    }
+
+    const animate = () => {
+      currentPos.current.x += (targetPos.current.x - currentPos.current.x) * 0.1
+      currentPos.current.y += (targetPos.current.y - currentPos.current.y) * 0.1
+      applyTransform(currentPos.current.x, currentPos.current.y)
+
+      const dx = Math.abs(targetPos.current.x - currentPos.current.x)
+      const dy = Math.abs(targetPos.current.y - currentPos.current.y)
+      if (dx > 0.5 || dy > 0.5) {
+        rafRef.current = requestAnimationFrame(animate)
+      } else {
+        rafRef.current = null
       }
-      setIsVisible(true)
+    }
 
+    const onMouseMove = (e: MouseEvent) => {
+      targetPos.current = { x: e.clientX, y: e.clientY }
+      if (!visibleRef.current) {
+        visibleRef.current = true
+        setOpacity('1')
+      }
       if (!rafRef.current) {
-        const animate = () => {
-          // Smooth interpolation for fluid movement
-          currentPosition.current.x += (targetPosition.current.x - currentPosition.current.x) * 0.1
-          currentPosition.current.y += (targetPosition.current.y - currentPosition.current.y) * 0.1
-
-          setMousePosition({
-            x: currentPosition.current.x,
-            y: currentPosition.current.y,
-          })
-
-          // Continue animation if there's still movement
-          if (
-            Math.abs(targetPosition.current.x - currentPosition.current.x) > 0.5 ||
-            Math.abs(targetPosition.current.y - currentPosition.current.y) > 0.5
-          ) {
-            rafRef.current = requestAnimationFrame(animate)
-          } else {
-            rafRef.current = null
-          }
-        }
         rafRef.current = requestAnimationFrame(animate)
       }
     }
 
-    const handleMouseLeave = () => {
-      setIsVisible(false)
+    const onMouseLeave = () => {
+      visibleRef.current = false
+      setOpacity('0')
     }
 
-    // Check for reduced motion
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    if (prefersReducedMotion) {
-      return
-    }
-
-    window.addEventListener('mousemove', handleMouseMove, { passive: true })
-    document.addEventListener('mouseleave', handleMouseLeave)
+    window.addEventListener('mousemove', onMouseMove, { passive: true })
+    document.addEventListener('mouseleave', onMouseLeave)
 
     return () => {
-      window.removeEventListener('mousemove', handleMouseMove)
-      document.removeEventListener('mouseleave', handleMouseLeave)
-      if (rafRef.current) {
-        cancelAnimationFrame(rafRef.current)
-      }
+      window.removeEventListener('mousemove', onMouseMove)
+      document.removeEventListener('mouseleave', onMouseLeave)
+      if (rafRef.current) cancelAnimationFrame(rafRef.current)
     }
   }, [])
 
   return (
-    <div
-      ref={containerRef}
-      className="fixed inset-0 pointer-events-none z-[1] overflow-hidden"
-      aria-hidden="true"
-    >
-      {/* Main blurry circle following mouse - minimal - using theme colors */}
+    <div className="fixed inset-0 pointer-events-none z-[1] overflow-hidden" aria-hidden="true">
       <div
-        className={`absolute transition-opacity duration-700 ease-out ${
-          isVisible ? 'opacity-30' : 'opacity-0'
-        }`}
+        ref={blob1Ref}
+        className="absolute top-0 left-0 opacity-0 transition-opacity duration-700"
         style={{
-          left: `${mousePosition.x}px`,
-          top: `${mousePosition.y}px`,
-          transform: 'translate(-50%, -50%)',
           width: '500px',
           height: '500px',
           background: 'radial-gradient(circle, rgba(96, 165, 250, 0.08) 0%, transparent 70%)',
@@ -85,16 +80,10 @@ const MouseTracker = () => {
           willChange: 'transform',
         }}
       />
-
-      {/* Secondary smaller blurry circle - accent-secondary */}
       <div
-        className={`absolute transition-opacity duration-900 ease-out ${
-          isVisible ? 'opacity-25' : 'opacity-0'
-        }`}
+        ref={blob2Ref}
+        className="absolute top-0 left-0 opacity-0 transition-opacity duration-700"
         style={{
-          left: `${mousePosition.x}px`,
-          top: `${mousePosition.y}px`,
-          transform: 'translate(-50%, -50%)',
           width: '300px',
           height: '300px',
           background: 'radial-gradient(circle, rgba(129, 140, 248, 0.06) 0%, transparent 60%)',
@@ -102,16 +91,10 @@ const MouseTracker = () => {
           willChange: 'transform',
         }}
       />
-
-      {/* Small accent dot - very minimal - accent-primary */}
       <div
-        className={`absolute transition-opacity duration-500 ease-out ${
-          isVisible ? 'opacity-35' : 'opacity-0'
-        }`}
+        ref={blob3Ref}
+        className="absolute top-0 left-0 opacity-0 transition-opacity duration-500"
         style={{
-          left: `${mousePosition.x}px`,
-          top: `${mousePosition.y}px`,
-          transform: 'translate(-50%, -50%)',
           width: '150px',
           height: '150px',
           background: 'radial-gradient(circle, rgba(96, 165, 250, 0.1) 0%, transparent 50%)',
@@ -124,4 +107,3 @@ const MouseTracker = () => {
 }
 
 export default MouseTracker
-

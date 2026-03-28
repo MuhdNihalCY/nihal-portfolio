@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { FaGithub, FaExternalLinkAlt, FaRocket } from 'react-icons/fa'
+import { FaGithub, FaExternalLinkAlt, FaRocket, FaCheckCircle } from 'react-icons/fa'
 import { useScrollAnimation } from '../hooks/useScrollAnimation'
 import { projects } from '../data/projects'
 import { Parallax } from './Parallax'
@@ -63,13 +63,45 @@ const Projects = () => {
 
                   {/* Right side - Content */}
                   <div className="flex-grow">
-                    <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-text-primary mb-4 group-hover:text-accent-primary transition-colors">
-                      {project.title}
-                    </h3>
-                    
+                    {/* Title row with optional badge */}
+                    <div className="flex flex-wrap items-center gap-3 mb-4">
+                      <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-text-primary group-hover:text-accent-primary transition-colors">
+                        {project.title}
+                      </h3>
+                      {project.badge && (
+                        <span className="px-3 py-1 bg-accent-primary/10 border border-accent-primary/40 text-accent-primary text-xs font-mono font-bold rounded-full uppercase tracking-wider">
+                          {project.badge}
+                        </span>
+                      )}
+                    </div>
+
                     <p className="text-text-secondary mb-6 text-base sm:text-lg leading-relaxed max-w-4xl">
                       {project.description}
                     </p>
+
+                    {/* Highlights */}
+                    {project.highlights && project.highlights.length > 0 && (
+                      <ul className="mb-6 space-y-2">
+                        {project.highlights.map((point, i) => (
+                          <li key={i} className="flex items-start gap-2.5 text-text-secondary text-sm sm:text-base leading-relaxed">
+                            <FaCheckCircle className="text-accent-primary/60 mt-0.5 flex-shrink-0 text-sm" />
+                            <span>{point}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+
+                    {/* Stats grid */}
+                    {project.stats && project.stats.length > 0 && (
+                      <div className="grid grid-cols-3 sm:grid-cols-6 gap-3 mb-6 p-4 bg-dark-bg/60 rounded-xl border border-accent-primary/10">
+                        {project.stats.map((stat, i) => (
+                          <div key={i} className="text-center">
+                            <div className="text-xl sm:text-2xl font-bold text-accent-primary font-mono">{stat.value}</div>
+                            <div className="text-text-secondary text-xs mt-0.5 leading-tight">{stat.label}</div>
+                          </div>
+                        ))}
+                      </div>
+                    )}
 
                     {/* Technologies */}
                     <div className="flex flex-wrap gap-2 mb-6">
@@ -85,18 +117,20 @@ const Projects = () => {
 
                     {/* Links */}
                     <div className="flex items-center gap-4 pt-4 border-t-2 border-accent-primary/10">
-                      <motion.a
-                        whileHover={{ scale: 1.1, x: 5 }}
-                        whileTap={{ scale: 0.95 }}
-                        href={project.githubUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-2 text-text-secondary hover:text-accent-primary transition-colors text-sm sm:text-base font-mono font-semibold link-underline smooth-transition interactive-element"
-                        aria-label="View on GitHub"
-                      >
-                        <FaGithub className="smooth-transition" />
-                        <span>Code</span>
-                      </motion.a>
+                      {project.githubUrl && (
+                        <motion.a
+                          whileHover={{ scale: 1.1, x: 5 }}
+                          whileTap={{ scale: 0.95 }}
+                          href={project.githubUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-2 text-text-secondary hover:text-accent-primary transition-colors text-sm sm:text-base font-mono font-semibold link-underline smooth-transition interactive-element"
+                          aria-label={`View ${project.title} source code`}
+                        >
+                          <FaGithub className="smooth-transition" />
+                          <span>Code</span>
+                        </motion.a>
+                      )}
                       {project.liveUrl && (
                         <motion.a
                           whileHover={{ scale: 1.1, x: 5 }}
@@ -105,11 +139,14 @@ const Projects = () => {
                           target="_blank"
                           rel="noopener noreferrer"
                           className="flex items-center gap-2 text-text-secondary hover:text-accent-primary transition-colors text-sm sm:text-base font-mono font-semibold link-underline smooth-transition interactive-element"
-                          aria-label="View Live"
+                          aria-label={`View ${project.title} live demo`}
                         >
                           <FaExternalLinkAlt className="smooth-transition" />
                           <span>Live</span>
                         </motion.a>
+                      )}
+                      {!project.githubUrl && !project.liveUrl && (
+                        <span className="text-text-secondary/40 text-sm font-mono italic">Private codebase</span>
                       )}
                     </div>
                   </div>

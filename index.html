@@ -7,23 +7,61 @@
     <meta name="description" content="Muhammed Nihal C Y - Full-Stack Developer Portfolio. Experienced software engineer specializing in React, TypeScript, Node.js, and modern web development." />
     <meta name="keywords" content="Full-Stack Developer, React Developer, TypeScript, Node.js, Web Developer, Software Engineer, Portfolio" />
     <meta name="author" content="Muhammed Nihal C Y" />
-    
+
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Muhammed Nihal C Y - Full-Stack Developer" />
     <meta property="og:description" content="Experienced Full-Stack Developer specializing in React, TypeScript, Node.js, and modern web development." />
     <meta property="og:url" content="https://mnihalcy.netlify.app/" />
-    
+
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Muhammed Nihal C Y - Full-Stack Developer" />
     <meta name="twitter:description" content="Experienced Full-Stack Developer specializing in React, TypeScript, Node.js, and modern web development." />
-    
+
     <title>Muhammed Nihal C Y - Full-Stack Developer</title>
+
+    <!-- Inline loading screen — visible before any JS downloads -->
+    <style>
+      #app-loading {
+        position: fixed;
+        inset: 0;
+        background: #0d0d0d;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 99999;
+        transition: opacity 0.4s ease;
+      }
+      #app-loading.hidden {
+        opacity: 0;
+        pointer-events: none;
+      }
+      .ld {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #60a5fa;
+        margin: 0 5px;
+        animation: ldpulse 1.2s ease-in-out infinite;
+      }
+      .ld:nth-child(2) { animation-delay: 0.2s; }
+      .ld:nth-child(3) { animation-delay: 0.4s; }
+      @keyframes ldpulse {
+        0%, 80%, 100% { transform: scale(0.55); opacity: 0.25; }
+        40%            { transform: scale(1);    opacity: 1; }
+      }
+    </style>
   </head>
   <body>
+    <div id="app-loading">
+      <div style="display:flex;align-items:center">
+        <div class="ld"></div>
+        <div class="ld"></div>
+        <div class="ld"></div>
+      </div>
+    </div>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
-

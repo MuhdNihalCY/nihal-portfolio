@@ -25,6 +25,10 @@ export const useParallax = ({
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     if (prefersReducedMotion) return
 
+    // Disable on touch/mobile devices — parallax doesn't work on scroll and hurts performance
+    const isTouchDevice = window.matchMedia('(pointer: coarse)').matches
+    if (isTouchDevice) return
+
     const element = elementRef.current
     if (!element) return
 

@@ -106,7 +106,7 @@ const Hero = () => {
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => smoothScrollTo('projects')}
-                className="px-8 py-4 bg-accent-primary text-white font-bold rounded-lg shadow-lg hover:bg-accent-primary/90 transition-colors button-ripple smooth-transition"
+                className="px-8 py-4 bg-accent-primary text-dark-bg font-bold rounded-lg shadow-lg hover:bg-accent-primary/90 transition-colors button-ripple smooth-transition"
               >
                 View Projects
               </motion.button>

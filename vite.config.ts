@@ -1,10 +1,11 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
-// https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
   build: {
+    // Emit <link rel="modulepreload"> tags so vendor chunks download in parallel
+    modulePreload: { polyfill: true },
     rollupOptions: {
       output: {
         manualChunks: {
@@ -15,4 +16,3 @@ export default defineConfig({
     },
   },
 })
-

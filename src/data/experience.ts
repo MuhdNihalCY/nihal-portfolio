@@ -5,7 +5,7 @@ export const experiences: Experience[] = [
     company: 'Zennode Technologies',
     position: 'Software Engineer',
     startDate: 'March 2024',
-    endDate: 'Present',
+    endDate: 'February 2026',
     description: [
       'Developed and maintained high-performance WordPress plugins used by over 500,000 brands globally, driving scalability and exceptional user experiences.',
       'Built and customized responsive static websites and WordPress themes optimized for performance, SEO, and accessibility.',
