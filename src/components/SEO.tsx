@@ -1,37 +1,14 @@
 import { useEffect } from 'react'
 import { personal } from '../data/personal'
 
+// Structured data lives in index.html so Google sees it in the raw HTML response.
+// This component only handles the document title (can't be set statically in index.html).
 const SEO = () => {
   useEffect(() => {
-    // Update document title
-    document.title = `${personal.name} - ${personal.title}`
-
-    // Add structured data
-    const script = document.createElement('script')
-    script.type = 'application/ld+json'
-    script.id = 'structured-data'
-    script.text = JSON.stringify({
-      '@context': 'https://schema.org',
-      '@type': 'Person',
-      name: personal.name,
-      jobTitle: personal.title,
-      email: personal.email,
-      telephone: personal.phone,
-      url: personal.website,
-      sameAs: [personal.linkedin, personal.github],
-    })
-    document.head.appendChild(script)
-
-    return () => {
-      const existingScript = document.getElementById('structured-data')
-      if (existingScript) {
-        document.head.removeChild(existingScript)
-      }
-    }
+    document.title = `${personal.name} — Full-Stack Developer | Kerala, India`
   }, [])
 
   return null
 }
 
 export default SEO
-
