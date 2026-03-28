@@ -3,7 +3,7 @@ import { Project } from '../types'
 export const projects: Project[] = [
   {
     title: 'Gift Card SaaS Platform',
-    badge: 'Production-Ready',
+    badge: 'Under Development',
     description:
       'A full-stack, multi-tenant SaaS application built to give businesses a complete gift card infrastructure - without building one from scratch. Merchants onboard, configure payment gateways, create branded gift card products, and track sales through analytics dashboards. Customers get a storefront, digital wallet, and multiple redemption methods including QR code, link, and API - compatible with both online and in-store POS workflows.',
     technologies: [
