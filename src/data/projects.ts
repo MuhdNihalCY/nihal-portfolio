@@ -5,7 +5,7 @@ export const projects: Project[] = [
     title: 'Gift Card SaaS Platform',
     badge: 'Production-Ready',
     description:
-      'A full-stack, multi-tenant SaaS application built to give businesses a complete gift card infrastructure - without building one from scratch. Merchants onboard, configure payment gateways, create branded gift card products, and track sales through analytics dashboards. Customers get a storefront, digital wallet, and multiple redemption methods including QR code, link, and API — compatible with both online and in-store POS workflows.',
+      'A full-stack, multi-tenant SaaS application built to give businesses a complete gift card infrastructure - without building one from scratch. Merchants onboard, configure payment gateways, create branded gift card products, and track sales through analytics dashboards. Customers get a storefront, digital wallet, and multiple redemption methods including QR code, link, and API - compatible with both online and in-store POS workflows.',
     technologies: [
       'Node.js', 'Express.js', 'TypeScript', 'Next.js 14', 'React 18',
       'PostgreSQL', 'Prisma ORM', 'Redis', 'BullMQ',
