@@ -1,4 +1,4 @@
-export const downloadResume = (resumeUrl: string, filename = 'resume.pdf'): void => {
+export const downloadResume = (resumeUrl: string, filename = 'Muhammed_Nihal_CY_Resume.pdf'): void => {
   const link = document.createElement('a')
   link.href = resumeUrl
   link.download = filename
